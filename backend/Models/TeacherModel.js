@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+const moment = require("moment")
 const schema = new mongoose.Schema({
    name :{
     type:String,
@@ -15,7 +16,9 @@ const schema = new mongoose.Schema({
     subject:{
         type:String,
         required:true
-    }
+    },
+    date:{ type:String,default:moment().format("MM/DD/yyy"),}
+
 
 })
 const Teacher = mongoose.model("Teacher",schema)
