@@ -6,7 +6,11 @@ const schema = new mongoose.Schema({
      required:true,
      ref:"Teacher"
     },
-    date: moment().format(),
+    date:{ 
+        type:String,
+        default:moment().format("MM/DD/yyy"),
+    },
+    
     StudentsAttendance:{
         type:JSON,
         required:true,

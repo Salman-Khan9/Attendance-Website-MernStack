@@ -17,7 +17,6 @@ const schema = new mongoose.Schema({
         type:String,
         required:true
     },
-    date:{ type:String,default:moment().format("MM/DD/yyy"),}
 
 
 })
