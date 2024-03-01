@@ -9,7 +9,7 @@ const schema = new mongoose.Schema({
         type:String,
         required : true
     },
-    class:{
+    classname:{
         type:String,
         required:true,
     },
