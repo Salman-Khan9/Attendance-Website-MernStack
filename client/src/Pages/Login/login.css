@@ -1,0 +1,38 @@
+.card {
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card h2 {
+    color: #007bff;
+  }
+  
+  .card form label {
+    font-weight: bold;
+  }
+  
+  .card form input[type="email"],
+  .card form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+  }
+  
+  .card form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .card form button:hover {
+    background-color: #0056b3;
+  }

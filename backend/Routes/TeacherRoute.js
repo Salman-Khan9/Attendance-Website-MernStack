@@ -24,7 +24,7 @@ routes.post("/signup",async(req,res)=>{
             sameSite : "none",
             secure : true,
         })
-        res.status(200).json(user)
+        res.status(200).json("registered")
     } catch (error) {
         res.status(400).json(error)
     }
