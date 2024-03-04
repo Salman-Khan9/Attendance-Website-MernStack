@@ -24,7 +24,8 @@ routes.post("/signup",async(req,res)=>{
             sameSite : "none",
             secure : true,
         })
-        res.status(200).json("registered")
+        
+        res.status(200).json({name,subject})
     } catch (error) {
         res.status(400).json(error)
     }
@@ -49,7 +50,8 @@ routes.post("/login",async(req,res)=>{
             secure : true,
 
         })
-        res.status(200).json(user)
+        const {name,subject} = user
+        res.status(200).json({name,subject})
     } catch (error) {
         res.status(400).json(error)
     }

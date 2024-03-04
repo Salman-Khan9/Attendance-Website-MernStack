@@ -1,28 +1,30 @@
-import axios from "axios"
-import { set_logstatus } from "../Redux/Slices/AuthSlice"
-import { useNavigate } from "react-router"
-import {useDispatch } from "react-redux"
-import { useEffect } from "react"
+// Authentication.js
+import axios from "axios";
+import { set_logstatus } from "../Redux/Slices/AuthSlice";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-const Authentication = async(path) => {
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
-    useEffect(() => {
-        const logstatus = async()=>{
+const Authentication = (path) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-           
-                const res = await axios.get("http://localhost:4000/logged",{withCredentials:true})
-               dispatch( set_logstatus(res.data))
-                if(res.data!==true){
-            navigate(path)
-                }
-             
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get("http://localhost:4000/logged", { withCredentials: true });
+        dispatch(set_logstatus(res.data));
+        if (!res.data) {
+          navigate(path);
         }
-        logstatus()
-       
-    }, [navigate,path,dispatch])
-    
- 
-}
+      } catch (error) {
+        console.log(error);
+        // Handle error as needed
+      }
+    };
 
-export default Authentication
+    fetchData();
+  }, [dispatch, navigate, path]);
+};
+
+export default Authentication;

@@ -1,10 +1,15 @@
 import React, { useState } from 'react'
+import {useDispatch} from "react-redux"
 import "bootstrap"
 import "react-bootstrap"
 import axios from "axios"
 import "../Signup/Signup.css"
 import Navbar from '../../Components/Navbar/Navbar'
+import { set_teacher } from '../../Redux/Slices/TeacherSlice'
+import { useNavigate } from 'react-router'
 const Signup = () => {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
   const initialvalue = {
     name:"",
     email:"",
@@ -23,7 +28,8 @@ const handleonsubmit =async (e)=>{
   e.preventDefault()
   try {
     const res = await axios.post("http://localhost:4000/signup",Formdata,{withCredentials:true})
-    console.log(res.data)
+    dispatch(set_teacher(res.data))
+    navigate("/")
   } catch (error) {
     console.log(error)
   }
