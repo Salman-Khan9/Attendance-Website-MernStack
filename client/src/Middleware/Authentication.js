@@ -13,8 +13,9 @@ const Authentication = (path) => {
     const fetchData = async () => {
       try {
         const res = await axios.get("http://localhost:4000/logged", { withCredentials: true });
+        console.log(res.data)
         dispatch(set_logstatus(res.data));
-        if (!res.data) {
+        if (res.data!==true) {
           navigate(path);
         }
       } catch (error) {

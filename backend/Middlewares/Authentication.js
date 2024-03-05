@@ -6,12 +6,12 @@ try {
     const token = req.cookies.token
     
     if(!token){
-        res.status(400).json("Not Authorize Please Login")
+       return res.status(400).json("No token")
     }
     const verify = jwt.verify(token,process.env.SECRET_KEY)
     
     if(!verify){
-        res.status(400).json("Not Authorize Please Login")
+       return res.status(400).json("Not Authorize Please Login")
     }
         const userinfo =  await Teacher.findById(verify.id).select("-password")
         
