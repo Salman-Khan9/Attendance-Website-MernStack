@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Authentication from '../../Middleware/Authentication'
-import TakeAttendance from '../TakeAttendance/TakeAttendance'
+import TakeAttendance from '../../Components/TakeAttendance/TakeAttendance'
 import Navbar from '../../Components/Navbar/Navbar'
 import axios from 'axios'
 const Home = () => {

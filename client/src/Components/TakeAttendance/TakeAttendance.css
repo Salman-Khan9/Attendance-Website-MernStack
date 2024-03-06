@@ -1,0 +1,51 @@
+.attendance-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.class-buttons {
+    display: flex; /* Display the buttons in a row */
+    margin-bottom: 20px; /* Add some space between the buttons and the student list */
+}
+
+.class-button {
+    margin-right: 10px; /* Add some space between the buttons */
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.students-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.student-details {
+    list-style: none;
+    padding: 10px;
+    background-color: #f9f9f9;
+    margin-bottom: 10px;
+}
+
+.attendance-button {
+    margin-top: 5px;
+    padding: 5px 10px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.submit-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
