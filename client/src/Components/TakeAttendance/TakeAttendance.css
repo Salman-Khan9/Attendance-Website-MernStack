@@ -1,51 +1,182 @@
-.attendance-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+
+
+.attendance-container{
     margin-top: 20px;
-}
-
-.class-buttons {
-    display: flex; /* Display the buttons in a row */
-    margin-bottom: 20px; /* Add some space between the buttons and the student list */
-}
-
-.class-button {
-    margin-right: 10px; /* Add some space between the buttons */
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-}
-
-.students-list {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
+    text-align: center;
+   
 }
+.class-buttons{
+    display:flex;
+    justify-content : center
 
-.student-details {
-    list-style: none;
+}
+.class-button{
+    margin: 10px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.table-row{
+    padding-left: 50px;
+    padding-top: 10px;
+padding-right: 50px;
+padding-bottom: 10px;
+font-weight: 500;
+background-color: rgb(242, 239, 239);
+
+
+}
+.thead-row{
+    background-color: grey;
     padding: 10px;
-    background-color: #f9f9f9;
-    margin-bottom: 10px;
+    
 }
+.students-list{
+    background-color: rgb(219, 216, 216);
 
-.attendance-button {
-    margin-top: 5px;
-    padding: 5px 10px;
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    cursor: pointer;
+    padding: 6px;
+    border-radius: 5px;
 }
-
-.submit-button {
+.present-button{
+    background-color: rgb(202, 245, 202);
+    border-radius: 10px;
+    margin-right: 10px;
+}
+.absent-button{
+    background-color: rgb(255, 187, 187);
+    border-radius: 10px;
+    margin-right: 10px;
+}
+.submit{
+    display: flex;
+    justify-content: center;
     margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #dc3545;
-    color: #fff;
-    border: none;
-    cursor: pointer;
 }
+.submit-button{
+    border-radius: 10px;
+    padding: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: larger;
+    background-color: rgb(193, 234, 248)
+}
+
+.create-class-link{
+    text-align: center;
+    position: relative;
+    left: 500px;
+    top: 100px;
+    background-color: rgb(52, 52, 162);
+    width: 200px;
+
+    border-radius: 10px;
+     padding: 20px;    
+    text-decoration-line: none;
+    font-weight: 700;
+    color: white
+
+}
+.icon{
+    margin-left :10px;
+    
+}
+@media only screen and (max-width: 900px) {
+    .create-class-link{
+        text-align: center;
+        position: relative;
+        left: 180px;
+        top: 100px;
+        background-color: rgb(52, 52, 162);
+        width: 100px;
+    
+        border-radius: 10px;
+         padding: 20px;    
+        text-decoration-line: none;
+        font-weight: 700;
+        color: white
+    
+    }
+}
+@media only screen and (max-width: 576px) {
+    
+
+.attendance-container{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+   
+}
+.class-buttons{
+    display:flex;
+    justify-content : center
+
+}
+.class-button{
+    margin: 10px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.table-row{
+    padding-left: 18px;
+    padding-top: 10px;
+padding-right: 18px;
+padding-bottom: 10px;
+background-color: rgb(242, 239, 239);
+
+
+}
+.thead-row{
+    background-color: grey;
+}
+.students-list{
+    background-color: rgb(219, 216, 216);
+
+    padding: 6px;
+    border-radius: 5px;
+}
+.present-button{
+    background-color: rgb(202, 245, 202);
+    border-radius: 10px;
+    margin-bottom: 4px;
+}
+.absent-button{
+    background-color: rgb(255, 187, 187);
+margin-top: 4px;
+    border-radius: 10px;
+}
+.submit{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.submit-button{
+    border-radius: 10px;
+    padding: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: larger;
+    background-color: rgb(193, 234, 248)
+}
+.create-class-link{
+    text-align: center;
+    position: relative;
+    left: 20px;
+    top: 100px;
+    background-color: rgb(52, 52, 162);
+    width: 100px;
+
+    border-radius: 10px;
+     padding: 20px;    
+    text-decoration-line: none;
+    font-weight: 700;
+    color: white
+
+}
+.icon{
+    margin-left :10px;
+    
+}
+}
+

@@ -14,7 +14,8 @@ route.post("/Student",auth,async(req,res)=>{
 })
 route.get("/Allstudents",auth,async(req,res)=>{
     try {
-        const studentdata = await Student.find()
+        
+        const studentdata = await Student.find({teacher:req.user.id})
         const classname= studentdata.map((data)=>data.classname)
         const uniqueclassArray = [...new Set(classname)]
         const payload = {

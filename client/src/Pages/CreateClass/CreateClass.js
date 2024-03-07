@@ -34,7 +34,7 @@ try {
     <div className="create-class-container">
     <div className='create-class-form-container'>
     <div className="create-class-form">
-        <h2>Create Class</h2>
+        <h2>Add student in class</h2>
         <form onSubmit={handelonsubmit}>
             <label>Student Name</label>
             <input type="text" name="name" value={name} placeholder="Enter student name" onChange={handleonchange} />

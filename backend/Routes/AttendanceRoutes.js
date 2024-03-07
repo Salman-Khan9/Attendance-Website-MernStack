@@ -12,10 +12,10 @@ router.post("/students/attendance",auth,async(req,res)=>{
         res.status(400).json("Error in uploading attendance")
     }
 })
-router.get("/Attendance/History",async(req,res)=>{
+router.get("/Attendance/History",auth,async(req,res)=>{
     try {
 
-        const attendancehistory = await Attendance.find()
+        const attendancehistory = await Attendance.find({teacher:req.user.id})
         const classname = []
          attendancehistory.forEach((data)=>{data.StudentsAttendance.forEach((subdata)=>
             {
