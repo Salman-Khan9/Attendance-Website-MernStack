@@ -2,9 +2,14 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Authentication from '../../Middleware/Authentication'
 import Navbar from '../../Components/Navbar/Navbar'
+import "../AttendanceHistory/AttendanceHistory.css"
+import { useSelector } from 'react-redux'
+import { selectteacher } from '../../Redux/Slices/TeacherSlice'
 
 const AttendanceHistory = () => {
     Authentication("/login")
+    const teacher = useSelector(selectteacher)
+
     const [Attendancedata, setAttendancedata] = useState([])
     const [classname, setclassname] = useState([])
     const [filteredattendance, setfilteredattendance] = useState([])
@@ -41,6 +46,7 @@ const AttendanceHistory = () => {
     <>
     <div>
         <Navbar></Navbar>
+<div className='teacher'><span className='Teacher-name'>Teacher: {teacher.name}</span><span className='subject-name'>Subject: {teacher.subject}</span></div>
         
         {classname.map((classes,index)=>(
             <button onClick={()=>handleonclick(classes)}>{classes}</button>

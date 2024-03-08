@@ -1,0 +1,34 @@
+.teacher{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    color: white;
+    font-weight: 700;
+    font-size: xx-large;
+  background-color: rgb(128,128,128)
+    
+}
+.teacher-name{
+ margin-right: 20px;
+}
+.subject-name{
+margin-left: 20px;
+}
+@media only screen and (max-width: 576px) {
+    .teacher{
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+        color: white;
+        font-weight: 400;
+        font-size: medium;
+      background-color: rgb(128,128,128)
+        
+    }
+    .teacher-name{
+     margin-right: 10px;
+    }
+    .subject-name{
+    margin-left: 10px;
+    }
+}

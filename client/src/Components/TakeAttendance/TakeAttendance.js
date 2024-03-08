@@ -72,12 +72,15 @@ try {
   return (
     <>
    {createclassbutton?<div className='class-buttons'>
+   <span className='fw-bold fs-3'>Select class:</span> 
     {classname.map((classes, index) => (
-      <span className='fw-bold fs-3'>Select class: <button className='class-button' key={index} onClick={() => handlefilter(classes)}>Class: {classes}</button></span>  
+       <button className='class-button' key={index} onClick={() => handlefilter(classes)}>Class: {classes}</button> 
     ))}
     </div>:
-    <Link className='create-class-link' to="/add/students/in/class">Add Students in Class<MdOutlinePersonAdd size={22} className='icon'/>
+   <div className='create-class-button'>
+     <Link className='create-class-link' to="/add/students/in/class">Add Students in Class<MdOutlinePersonAdd size={22} className='icon'/>
     </Link> 
+   </div>
 } 
    {submitbutton?<div className='attendance-container' >
    
@@ -87,11 +90,9 @@ try {
 
                <thead >
                    <tr >
-                       <th className='thead-row'>#</th>
-                       <th className='thead-row'>Student Name</th>
+                       <th className='thead-row'>Name</th>
                        <th className='thead-row'>Class</th>
-                       <th className='thead-row'>Roll-Number</th>
-                      
+                       <th className='thead-row'>Roll-No</th>
                        <th className='thead-row'>Attendance</th>
                    </tr>
                    
@@ -99,7 +100,6 @@ try {
                <tbody>
    {filteredstudents.map((data, index) => (
        <tr key={index}>
-           <td className='table-row'>{index+1}</td>
            <td className='table-row'>{data.name}</td>
            <td className='table-row'>{data.classname}</td>
            <td className='table-row'>{data.rollno}</td>

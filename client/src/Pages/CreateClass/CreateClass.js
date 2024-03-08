@@ -3,8 +3,12 @@ import React, {  useState } from 'react'
 import "../CreateClass/createclass.css"
 import Authentication from '../../Middleware/Authentication'
 import Navbar from '../../Components/Navbar/Navbar'
+import { useSelector } from 'react-redux'
+import { selectteacher } from '../../Redux/Slices/TeacherSlice'
 
 const CreateClass = () => {
+    const teacher = useSelector(selectteacher)
+
     Authentication("/login")
     const initialstate = {
         name:"",
@@ -31,6 +35,8 @@ try {
 
   return (
 <><Navbar></Navbar>
+<div className='teacher'><span className='Teacher-name'>Teacher: {teacher.name}</span><span className='subject-name'>Subject: {teacher.subject}</span></div>
+
     <div className="create-class-container">
     <div className='create-class-form-container'>
     <div className="create-class-form">

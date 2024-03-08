@@ -9,8 +9,8 @@
 }
 .class-buttons{
     display:flex;
-    justify-content : center
-
+    justify-content : center;
+background-color : lightgrey
 }
 .class-button{
     margin: 10px;
@@ -35,7 +35,6 @@ background-color: rgb(242, 239, 239);
 }
 .students-list{
     background-color: rgb(219, 216, 216);
-
     padding: 6px;
     border-radius: 5px;
 }
@@ -63,19 +62,21 @@ background-color: rgb(242, 239, 239);
 }
 
 .create-class-link{
+    
     text-align: center;
-    position: relative;
-    left: 500px;
-    top: 100px;
+    
     background-color: rgb(52, 52, 162);
-    width: 200px;
-
+    width: 250px;
     border-radius: 10px;
      padding: 20px;    
     text-decoration-line: none;
     font-weight: 700;
     color: white
 
+}
+.create-class-button{
+    display: flex;
+    justify-content: center;
 }
 .icon{
     margin-left :10px;
@@ -84,11 +85,8 @@ background-color: rgb(242, 239, 239);
 @media only screen and (max-width: 900px) {
     .create-class-link{
         text-align: center;
-        position: relative;
-        left: 180px;
-        top: 100px;
         background-color: rgb(52, 52, 162);
-        width: 100px;
+        width: 240px;
     
         border-radius: 10px;
          padding: 20px;    
@@ -98,6 +96,11 @@ background-color: rgb(242, 239, 239);
     
     }
 }
+.create-class-button{
+    display: flex;
+    justify-content: center;
+    margin :20px
+}
 @media only screen and (max-width: 576px) {
     
 
@@ -106,6 +109,7 @@ background-color: rgb(242, 239, 239);
     display: flex;
     justify-content: center;
     text-align: center;
+
    
 }
 .class-buttons{
@@ -120,10 +124,10 @@ background-color: rgb(242, 239, 239);
     font-family: Arial, Helvetica, sans-serif;
 }
 .table-row{
-    padding-left: 18px;
-    padding-top: 10px;
-padding-right: 18px;
-padding-bottom: 10px;
+    padding-left: 14px;
+    padding-top: 8px;
+padding-right: 14px;
+padding-bottom: 8px;
 background-color: rgb(242, 239, 239);
 
 
@@ -161,11 +165,8 @@ margin-top: 4px;
 }
 .create-class-link{
     text-align: center;
-    position: relative;
-    left: 20px;
-    top: 100px;
     background-color: rgb(52, 52, 162);
-    width: 100px;
+    width: 240px;
 
     border-radius: 10px;
      padding: 20px;    
@@ -178,5 +179,94 @@ margin-top: 4px;
     margin-left :10px;
     
 }
+.create-class-button{
+    display: flex;
+    justify-content: center;
+    margin: 20px;
 }
+}
+@media only screen and (max-width: 400px) {
+    .attendance-container{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-right: 30px;
+   
+}
+.class-buttons{
+    display:flex;
+    justify-content : center;
+    text-align: center;
+
+
+}
+.class-button{
+    margin: 10px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.table-row{
+    padding-left: 0px;
+    padding-top: 0px;
+padding-right: 0px;
+padding-bottom: 0px;
+background-color: rgb(242, 239, 239);
+
+
+}
+.thead-row{
+    background-color: grey;
+}
+.students-list{
+    background-color: rgb(219, 216, 216);
+    margin-left: 35px;
+    margin-right: 0px;
+    padding: 6px;
+    border-radius: 5px;
+}
+.present-button{
+    background-color: rgb(202, 245, 202);
+    border-radius: 10px;
+    margin-bottom: 4px;
+}
+.absent-button{
+    background-color: rgb(255, 187, 187);
+margin-top: 4px;
+    border-radius: 10px;
+}
+.submit{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.submit-button{
+    border-radius: 10px;
+    padding: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: larger;
+    background-color: rgb(193, 234, 248)
+}
+.create-class-link{
+    text-align: center;
+    background-color: rgb(52, 52, 162);
+    width: 240px;
+
+    border-radius: 10px;
+     padding: 20px;    
+    text-decoration-line: none;
+    font-weight: 700;
+    color: white
+
+}
+.icon{
+    margin-left :10px;
+    
+}
+.create-class-button{
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}}
 

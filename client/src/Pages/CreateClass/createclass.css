@@ -1,10 +1,27 @@
+.teacher{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    color: white;
+    font-weight: 700;
+    font-size: xx-large;
+  background-color: rgb(128,128,128)
+    
+}
+.teacher-name{
+ margin-right: 20px;
+}
+.subject-name{
+margin-left: 20px;
+}
 .create-class-container {
     display: flex;
+    justify-content: center;
     height: 60vh;
 }
 .create-class-form-container{
     margin-left: 100px;
-    margin-top: 100px;
+    margin-top: 50px;
     
 }
 .create-class-form {
@@ -44,3 +61,67 @@
 .create-class-form button:hover {
     background-color: #0056b3;
 }
+@media only screen and (max-width: 576px) {
+    .create-class-container {
+        display: flex;
+        justify-content: center;
+        height: 60vh;
+        margin-right: 100px;
+    }
+    
+    .create-class-form {
+        width: 285px;
+        padding: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .create-class-form h2 {
+        margin-bottom: 20px;
+    }
+    
+    .create-class-form label {
+        margin-bottom: 5px;
+    }
+    
+    .create-class-form input {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+    
+    .create-class-form button {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+    
+    .create-class-form button:hover {
+        background-color: #0056b3;
+    }
+    .teacher{
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+        color: white;
+        font-weight: 400;
+        font-size: medium;
+      background-color: rgb(128,128,128)
+        
+    }
+    .teacher-name{
+     margin-right: 10px;
+    }
+    .subject-name{
+    margin-left: 10px;
+    }
+
+}
+
