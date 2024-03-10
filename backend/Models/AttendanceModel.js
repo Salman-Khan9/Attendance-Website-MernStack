@@ -8,7 +8,7 @@ const schema = new mongoose.Schema({
     },
     date:{ 
         type:String,
-        default:moment().format("MM/DD/yyy"),
+        default:moment(Date.now()).format("MM/DD/yyy"),
     },
     
     StudentsAttendance:{

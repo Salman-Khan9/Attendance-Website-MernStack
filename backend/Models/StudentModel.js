@@ -10,7 +10,7 @@ const schema = new mongoose.Schema({
         required : true
     },
     classname:{
-        type:String,
+        type:Number,
         required:true,
     },
     rollno:{

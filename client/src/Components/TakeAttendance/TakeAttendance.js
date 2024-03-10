@@ -34,6 +34,7 @@ const TakeAttendance = () => {
       }, [])
       const handlefilter=(classes)=>{
       const studentdata =  studentdataarray.filter((data)=>data.classname===classes).map((students,index)=> students)
+      setAttendancedata([])
       setfilteredstudents(studentdata)
       setsubmitbutton(true)
       }

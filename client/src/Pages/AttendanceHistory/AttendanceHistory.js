@@ -6,6 +6,7 @@ import "../AttendanceHistory/AttendanceHistory.css"
 import { useSelector } from 'react-redux'
 import { selectteacher } from '../../Redux/Slices/TeacherSlice'
 
+
 const AttendanceHistory = () => {
     Authentication("/login")
     const teacher = useSelector(selectteacher)
@@ -39,32 +40,52 @@ const AttendanceHistory = () => {
             
         setfilteredattendance(data);
     }
-    console.log(filteredattendance)
-    
+
     
   return (
     <>
     <div>
         <Navbar></Navbar>
-<div className='teacher'><span className='Teacher-name'>Teacher: {teacher.name}</span><span className='subject-name'>Subject: {teacher.subject}</span></div>
-        
+<div className='history-teacher'><span className='history-Teacher-name'>Teacher: {teacher.name}</span><span className='history-subject-name'>Subject: {teacher.subject}</span>
+</div>
+        <div className='history-class-buttons'>
+   <span className='fw-bold fs-3'>Select class:</span> 
+            
         {classname.map((classes,index)=>(
-            <button onClick={()=>handleonclick(classes)}>{classes}</button>
+            <button className='history-class-button' onClick={()=>handleonclick(classes)}>Class:{classes}</button>
         ))}
+        </div>
+        
         </div>
         <div>
     {filteredattendance.map((data, index) => (
         <div >
-            <div>date: {data.date}</div>
-            <ul>
+
+            <div className='date-div'><div className='date'>Date: {data.date}</div></div>
+            <div className='history-attendance-container'>
+            <div className='history-students-list'>
+            <table>
+                <thead>
+                    <tr>
+                        <th className='history-thead-row'>Name</th>
+                        <th className='history-thead-row'>Class</th>
+                        <th className='history-thead-row'>Roll-no</th>
+                        <th className='history-thead-row'>Appearance</th>
+                    </tr>
+                </thead>
+                <tbody>
                 {data.StudentsAttendance.map((subdata, index) => (
-                  <>  <li key={index}>{subdata.name}</li>
-                    <li >{subdata.classname}</li>
-                    <li >{subdata.rollno}</li>
-                    <li >{subdata.attendance}</li>
+                  <>  <tr key={index}></tr>
+                    <td className='history-table-row'>{subdata.name}</td>
+                    <td className='history-table-row' >{subdata.classname}</td>
+                    <td className='history-table-row' >{subdata.rollno}</td>
+                    <td className='history-table-row' >{subdata.attendance}</td>
                     </>
                 ))}
-            </ul>
+                </tbody>
+            </table>
+            </div>
+            </div>
         </div>
     ))}
 </div>

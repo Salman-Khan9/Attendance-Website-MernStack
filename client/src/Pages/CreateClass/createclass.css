@@ -43,10 +43,17 @@ margin-left: 20px;
 .create-class-form input {
     width: 100%;
     padding: 8px;
+    
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
 }
+input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+     appearance: none;
+  }
+
+
 
 .create-class-form button {
     width: 100%;

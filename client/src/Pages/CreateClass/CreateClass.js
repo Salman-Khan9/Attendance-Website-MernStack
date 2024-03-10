@@ -12,7 +12,7 @@ const CreateClass = () => {
     Authentication("/login")
     const initialstate = {
         name:"",
-        classname:"",
+        classname:0,
         rollno:"",
     }
 const [formdata, setformdata] = useState(initialstate)
@@ -45,7 +45,7 @@ try {
             <label>Student Name</label>
             <input type="text" name="name" value={name} placeholder="Enter student name" onChange={handleonchange} />
             <label>Student Class</label>
-            <input type="text" name="classname" value={classname} placeholder="Enter student class" onChange={handleonchange} />
+            <input type="number" className='class-name' name="classname" value={classname} placeholder="Enter student class" onChange={handleonchange} />
             <label>Student Roll-No</label>
             <input type="text" name="rollno" value={rollno} placeholder="Enter student roll-no" onChange={handleonchange} />
             <button type="submit">Submit</button>
