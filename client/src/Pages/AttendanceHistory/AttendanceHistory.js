@@ -2,6 +2,8 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Authentication from '../../Middleware/Authentication'
 import Navbar from '../../Components/Navbar/Navbar'
+import 'react-calendar/dist/Calendar.css';
+import Calendar from 'react-calendar';
 import "../AttendanceHistory/AttendanceHistory.css"
 import { useSelector } from 'react-redux'
 import { selectteacher } from '../../Redux/Slices/TeacherSlice'
@@ -14,6 +16,8 @@ const AttendanceHistory = () => {
     const [Attendancedata, setAttendancedata] = useState([])
     const [classname, setclassname] = useState([])
     const [filteredattendance, setfilteredattendance] = useState([])
+    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [showCalendar, setShowCalendar] = useState(false);
     useEffect(() => {
       const fetchdata = async()=>{
         try {
@@ -40,7 +44,29 @@ const AttendanceHistory = () => {
             
         setfilteredattendance(data);
     }
+    const handleDateChange = date => {
+        setSelectedDate(date);
+        filterAttendanceByDate(date);
+        setShowCalendar(false)
+      };
+      const formatDate = (date) => {
+        const year = date.getFullYear();
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const day = date.getDate().toString().padStart(2, '0');
+        return `${month}/${day}/${year}`;
+      };
+    
+      const filterAttendanceByDate = (selectedDate) => {
+        const formattedDate = formatDate(selectedDate);
+    console.log(formattedDate)
 
+        const filteredData = Attendancedata.filter(attendance => attendance.date === formattedDate);
+        console.log(filteredData)
+        setfilteredattendance(filteredData);
+      };
+
+    
+      
     
   return (
     <>
@@ -57,11 +83,21 @@ const AttendanceHistory = () => {
         </div>
         
         </div>
+        <div className='calendar-container'>
+          <button className='calendar-button' onClick={() => setShowCalendar(!showCalendar)}>Search through calendar</button>
+          {showCalendar && (
+            <Calendar
+              onChange={handleDateChange}
+              value={selectedDate}
+              className='custom-calendar'
+            />
+          )}
+        </div>
         <div>
     {filteredattendance.map((data, index) => (
         <div >
 
-            <div className='date-div'><div className='date'>Date: {data.date}</div></div>
+            <span className='date-div'><div className='date'>Date: {data.date}</div></span>
             <div className='history-attendance-container'>
             <div className='history-students-list'>
             <table>

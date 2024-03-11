@@ -32,6 +32,9 @@ navigate("/login")
       </button>
       <div className="collapse navbar-collapse " id="navbarNav">
         <ul className="navbar-nav">
+        <li className="nav-item">
+            <Link className="nav-link btn btn-primary fs-5 text-white" to="/">Take-Attendance</Link>
+          </li>
           
           <li className="nav-item">
             <Link className="nav-link btn btn-primary fs-5 text-white" to="/add/students/in/class">Add-Students-in-class</Link>
@@ -50,7 +53,7 @@ navigate("/login")
    
    <nav className="navbar navbar-expand-lg navbar-light bg-light p-0" >
   <div className="container-fluid" style={{backgroundColor:"rgb(128,128,128)"}}>
-    <Link className="navbar-brand fw-bold fs-5" to="login">Attendify <IoSchool />
+    <Link className="navbar-brand fw-bold fs-5" to="/login">Attendify <IoSchool />
 </Link>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>

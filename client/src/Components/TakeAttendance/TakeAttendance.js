@@ -13,6 +13,8 @@ const TakeAttendance = () => {
     const [Attendancedata, setAttendancedata] = useState([])
     const [submitbutton, setsubmitbutton] = useState(false)
     const [createclassbutton, setcreateclassbutton] = useState(false)
+    const [presentbutton, setpresentbutton] = useState(true)
+    const [absentbutton, setabsentbutton] = useState(true)
     useEffect(() => {
     
         const fetchdata = async()=>{
@@ -40,6 +42,7 @@ const TakeAttendance = () => {
       }
 
     const handleonpresent=(data)=>{
+        setabsentbutton(false)
         const payload = {
             name : data.name,
             classname : data.classname,
@@ -49,6 +52,7 @@ const TakeAttendance = () => {
 setAttendancedata(prevData => [...prevData, payload])
     }
      const handleonabsent=(data)=>{
+        setpresentbutton(false)
         const payload = {
             name : data.name,
             classname : data.classname,
@@ -105,8 +109,8 @@ try {
            <td className='table-row'>{data.classname}</td>
            <td className='table-row'>{data.rollno}</td>
            <td className='table-row'>
-               <button className='present-button' onClick={() => handleonpresent(data)}>Present</button>
-               <button className='absent-button' onClick={() => handleonabsent(data)}>Absent</button>
+             {presentbutton?<button className='present-button' onClick={() => handleonpresent(data)}>Present</button>:null}  
+              {absentbutton?<button className='absent-button' onClick={() => handleonabsent(data)}>Absent</button>:null} 
            </td>
        </tr>
    ))}
