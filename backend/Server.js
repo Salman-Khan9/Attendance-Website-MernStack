@@ -10,7 +10,16 @@ const router = require("./Routes/AttendanceRoutes");
 const app = express();
 app.use(cors({
   origin:"https://attendify-website-mern-stack.vercel.app",
-  credentials:true
+  credentials:true,
+  optionsSuccessStatus: 200,
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  exposeHeaders: ['Content-Disposition'],
+  preflightContinue: false,
+  maxAge: 86400,
+  credentials: true,
+  headers: {
+    'Access-Control-Allow-Credentials': 'true'
+  }
 
 }))
 app.use(express.json())
