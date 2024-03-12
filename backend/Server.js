@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const routes = require("./Routes/TeacherRoute");
 const env = require("dotenv").config();
+const bodyParser = require("body-parser");
 const cors = require("cors")
 const cookieparser = require("cookie-parser");
 const route = require("./Routes/StudentRoutes");
@@ -15,6 +16,7 @@ app.use(cors({
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 app.use(cookieparser())
+app.use(bodyParser.json());
 
 app.use(routes)
 app.use(route)
