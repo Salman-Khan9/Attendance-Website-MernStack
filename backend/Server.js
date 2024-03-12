@@ -19,7 +19,7 @@ app.use(cors({
   credentials: true,
   headers: {
     'Access-Control-Allow-Credentials': 'true'
-  }
+  } 
 
 }))
 app.use(express.json())
