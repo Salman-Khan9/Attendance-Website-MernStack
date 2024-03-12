@@ -27,7 +27,7 @@ const Authentication = (path) => {
     };
 
     fetchData();
-  }, [dispatch, navigate, path]);
+  }, [dispatch, navigate, path,backend_url]);
 };
 
 export default Authentication;

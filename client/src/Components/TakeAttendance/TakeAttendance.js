@@ -34,7 +34,7 @@ const TakeAttendance = () => {
       }
     };
     fetchdata();
-  }, []);
+  }, [backend_url]);
 
   const handlefilter = (classes) => {
     const studentdata = studentdataarray

@@ -31,7 +31,7 @@ const AttendanceHistory = () => {
         }
       }
       fetchdata()
-    }, [])
+    }, [backend_url])
     const handleonclick = (classes) => {
         const data = Attendancedata
             .filter((attendance) => {
