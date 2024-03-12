@@ -8,6 +8,8 @@ import { selectteacher } from '../../Redux/Slices/TeacherSlice'
 
 const CreateClass = () => {
     const teacher = useSelector(selectteacher)
+    const backend_url = process.env.REACT_APP_BACKEND_URL
+
 
     Authentication("/login")
     const initialstate = {
@@ -25,7 +27,7 @@ const handleonchange=(e)=>{
 const handelonsubmit = async(e)=>{
     e.preventDefault()
 try {
-    const res = await axios.post("http://localhost:4000/Student",formdata,{withCredentials:true})
+    const res = await axios.post(`${backend_url}Student`,formdata,{withCredentials:true})
     setformdata(initialstate)
     console.log(res.data)
 } catch (error) {

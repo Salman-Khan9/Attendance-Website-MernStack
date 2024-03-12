@@ -8,6 +8,8 @@ import { set_teacher } from '../../Redux/Slices/TeacherSlice'
 import { set_logstatus } from '../../Redux/Slices/AuthSlice'
 
 const Login = () => {
+    const backend_url = process.env.REACT_APP_BACKEND_URL
+
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const initialvalue = {
@@ -25,7 +27,7 @@ const Login = () => {
     const handleonsubmit =async(e)=>{
         e.preventDefault()
         try {
-           const res =  await axios.post("http://localhost:4000/login",Formdata,{withCredentials:true})
+           const res =  await axios.post(`${backend_url}login`,Formdata,{withCredentials:true})
            console.log(res.data)
            dispatch(set_logstatus(true))
              dispatch(set_teacher(res.data))

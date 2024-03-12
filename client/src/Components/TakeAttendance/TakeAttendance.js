@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom';
 
 const TakeAttendance = () => {
   Authentication('/login');
+  const backend_url = process.env.REACT_APP_BACKEND_URL
+
   const [studentdataarray, setstudentdata] = useState([]);
   const [classname, setclassname] = useState([]);
   const [filteredstudents, setfilteredstudents] = useState([]);
@@ -17,7 +19,7 @@ const TakeAttendance = () => {
   useEffect(() => {
     const fetchdata = async () => {
       try {
-        const data = await axios.get('http://localhost:4000/Allstudents', {
+        const data = await axios.get(`${backend_url}Allstudents`, {
           withCredentials: true,
         });
 
@@ -68,7 +70,7 @@ const TakeAttendance = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        'http://localhost:4000/students/attendance',
+        `${backend_url}students/attendance`,
         Attendancedata,
         { withCredentials: true }
       );

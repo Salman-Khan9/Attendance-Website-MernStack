@@ -6,13 +6,15 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Authentication = (path) => {
+  const backend_url = process.env.REACT_APP_BACKEND_URL
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:4000/logged", { withCredentials: true });
+        const res = await axios.get(`${backend_url}logged`, { withCredentials: true });
         console.log(res.data)
         dispatch(set_logstatus(res.data));
         if (res.data!==true) {

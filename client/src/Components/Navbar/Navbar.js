@@ -8,12 +8,14 @@ import { selectloggedstatus, set_logstatus } from '../../Redux/Slices/AuthSlice'
 import { IoSchool } from "react-icons/io5";
 
 const Navbar = () => {
+  const backend_url = process.env.REACT_APP_BACKEND_URL
+
   const logged = useSelector(selectloggedstatus)
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const handlelogout = async()=>{
 try {
-   await axios.get("http://localhost:4000/logout",{withCredentials:true})
+   await axios.get(`${backend_url}logout`,{withCredentials:true})
    dispatch(set_logstatus(false))
 navigate("/login")
 } catch (error) {

@@ -11,6 +11,7 @@ import { selectteacher } from '../../Redux/Slices/TeacherSlice'
 
 const AttendanceHistory = () => {
     Authentication("/login")
+    const backend_url = process.env.REACT_APP_BACKEND_URL
     const teacher = useSelector(selectteacher)
 
     const [Attendancedata, setAttendancedata] = useState([])
@@ -21,7 +22,7 @@ const AttendanceHistory = () => {
     useEffect(() => {
       const fetchdata = async()=>{
         try {
-            const res = await axios.get("http://localhost:4000/Attendance/History",{withCredentials:true})
+            const res = await axios.get(`${backend_url}Attendance/History`,{withCredentials:true})
             const {attendancehistory,classname} = res.data
             setAttendancedata(attendancehistory)
             setclassname(classname)

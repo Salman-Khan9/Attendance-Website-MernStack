@@ -8,6 +8,8 @@ import Navbar from '../../Components/Navbar/Navbar'
 import { set_teacher } from '../../Redux/Slices/TeacherSlice'
 import { useNavigate } from 'react-router'
 const Signup = () => {
+  const backend_url = process.env.REACT_APP_BACKEND_URL
+
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const initialvalue = {
@@ -27,7 +29,7 @@ const Signup = () => {
 const handleonsubmit =async (e)=>{
   e.preventDefault()
   try {
-    const res = await axios.post("http://localhost:4000/signup",Formdata,{withCredentials:true})
+    const res = await axios.post(`${backend_url}signup`,Formdata,{withCredentials:true})
     dispatch(set_teacher(res.data))
     navigate("/")
   } catch (error) {
