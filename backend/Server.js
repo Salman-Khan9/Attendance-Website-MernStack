@@ -8,7 +8,7 @@ const route = require("./Routes/StudentRoutes");
 const router = require("./Routes/AttendanceRoutes");
 const app = express();
 app.use(cors({
-  origin:"http://localhost:3000",
+  origin:"https://attendify-website-mern-stack.vercel.app",
   credentials:true
 
 }))
