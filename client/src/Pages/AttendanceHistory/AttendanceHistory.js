@@ -75,7 +75,7 @@ const AttendanceHistory = () => {
 <div className='history-teacher'><span className='history-Teacher-name'>Teacher: {teacher.name}</span><span className='history-subject-name'>Subject: {teacher.subject}</span>
 </div>
         <div className='history-class-buttons'>
-   <span className='fw-bold fs-3'>Select class:</span> 
+  {classname.length>0? <span className='fw-bold fs-3'>Select class:</span> :<span className='fw-bold fs-3'>History not available</span>}
             
         {classname.map((classes,index)=>(
             <button className='history-class-button' onClick={()=>handleonclick(classes)}>Class:{classes}</button>
@@ -83,7 +83,7 @@ const AttendanceHistory = () => {
         </div>
         
         </div>
-        <div className='calendar-container'>
+       {classname.length>0?<div className='calendar-container'>
           <button className='calendar-button' onClick={() => setShowCalendar(!showCalendar)}>Search through calendar</button>
           {showCalendar && (
             <Calendar
@@ -92,7 +92,7 @@ const AttendanceHistory = () => {
               className='custom-calendar'
             />
           )}
-        </div>
+        </div>:null} 
         <div>
     {filteredattendance.map((data, index) => (
         <div >
@@ -115,7 +115,7 @@ const AttendanceHistory = () => {
                     <td className='history-table-row'>{subdata.name}</td>
                     <td className='history-table-row' >{subdata.classname}</td>
                     <td className='history-table-row' >{subdata.rollno}</td>
-                    <td className='history-table-row' >{subdata.attendance}</td>
+                    <td className='history-table-row' >{subdata.attendance==="Present"?<p className='bg-success rounded p-2 fw-bold'>Present</p>:<p className='bg-danger rounded p-2 fw-bold'>Absent</p>}</td>
                     </>
                 ))}
                 </tbody>

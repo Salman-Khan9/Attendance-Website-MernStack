@@ -1,134 +1,161 @@
-import React, { useEffect, useState } from 'react'
-import Authentication from '../../Middleware/Authentication'
-import axios from 'axios'
-import "../TakeAttendance/TakeAttendance.css"
-import { MdOutlinePersonAdd } from "react-icons/md";
+import React, { useEffect, useState } from 'react';
+import Authentication from '../../Middleware/Authentication';
+import axios from 'axios';
+import '../TakeAttendance/TakeAttendance.css';
+import { MdOutlinePersonAdd } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 
-import { Link } from 'react-router-dom'
 const TakeAttendance = () => {
-    Authentication("/login")
-    const [studentdataarray, setstudentdata] = useState([])
-  const [classname, setclassname] = useState([])
-  const [filteredstudents, setfilteredstudents] = useState([])
-    const [Attendancedata, setAttendancedata] = useState([])
-    const [submitbutton, setsubmitbutton] = useState(false)
-    const [createclassbutton, setcreateclassbutton] = useState(false)
-    const [presentbutton, setpresentbutton] = useState(true)
-    const [absentbutton, setabsentbutton] = useState(true)
-    useEffect(() => {
-    
-        const fetchdata = async()=>{
-    try {
-      const data = await axios.get("http://localhost:4000/Allstudents",{withCredentials:true})
-      
-      const { studentdata, uniqueclassArray } = data.data;
-      if(studentdata.length > 0){
-        setcreateclassbutton(true)
-       }
-      setstudentdata(studentdata)
-      setclassname(uniqueclassArray)
-    } catch (error) {
-    console.log(error)    
-    }
-    
+  Authentication('/login');
+  const [studentdataarray, setstudentdata] = useState([]);
+  const [classname, setclassname] = useState([]);
+  const [filteredstudents, setfilteredstudents] = useState([]);
+  const [Attendancedata, setAttendancedata] = useState([]);
+  const [submitbutton, setsubmitbutton] = useState(false);
+  const [createclassbutton, setcreateclassbutton] = useState(false);
+
+  useEffect(() => {
+    const fetchdata = async () => {
+      try {
+        const data = await axios.get('http://localhost:4000/Allstudents', {
+          withCredentials: true,
+        });
+
+        const { studentdata, uniqueclassArray } = data.data;
+        if (studentdata.length > 0) {
+          setcreateclassbutton(true);
         }
-        fetchdata()
-      }, [])
-      const handlefilter=(classes)=>{
-      const studentdata =  studentdataarray.filter((data)=>data.classname===classes).map((students,index)=> students)
-      setAttendancedata([])
-      setfilteredstudents(studentdata)
-      setsubmitbutton(true)
+        setstudentdata(studentdata);
+        setclassname(uniqueclassArray);
+      } catch (error) {
+        console.log(error);
       }
+    };
+    fetchdata();
+  }, []);
 
-    const handleonpresent=(data)=>{
-        setabsentbutton(false)
-        const payload = {
-            name : data.name,
-            classname : data.classname,
-            rollno:data.rollno,
-            attendance:"Present"
-        }
-setAttendancedata(prevData => [...prevData, payload])
-    }
-     const handleonabsent=(data)=>{
-        setpresentbutton(false)
-        const payload = {
-            name : data.name,
-            classname : data.classname,
-            rollno:data.rollno,
-            attendance:"Absent"
-        }
-setAttendancedata(prevData => [...prevData, payload])
-    }
-    console.log(Attendancedata)
-    const handleonsubmit =async(e)=>{
-e.preventDefault()
-try {
-    const res = await axios.post("http://localhost:4000/students/attendance",Attendancedata,{withCredentials:true})
-    console.log(res.data)
-    setAttendancedata([])
-} catch (error) {
-    
-}
+  const handlefilter = (classes) => {
+    const studentdata = studentdataarray
+      .filter((data) => data.classname === classes)
+      .map((students, index) => students);
+    setAttendancedata([]);
+    setfilteredstudents(studentdata);
+    setsubmitbutton(true);
+  };
 
+  const handleAttendance = (data, attendance) => {
+    const updatedData = filteredstudents.map((student) => {
+      if (student.rollno === data.rollno) {
+        return {
+          ...student,
+          attendance: attendance,
+        };
+      }
+      return student;
+    });
+    setfilteredstudents(updatedData);
+
+    const payload = {
+      name: data.name,
+      classname: data.classname,
+      rollno: data.rollno,
+      attendance: attendance,
+    };
+    setAttendancedata((prevData) => [...prevData, payload]);
+  };
+
+  const handleonsubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post(
+        'http://localhost:4000/students/attendance',
+        Attendancedata,
+        { withCredentials: true }
+      );
+      console.log(res.data);
+      setAttendancedata([]);
+    } catch (error) {
+      console.log(error);
     }
+  };
 
   return (
     <>
-   {createclassbutton?<div className='class-buttons'>
-   <span className='fw-bold fs-3'>Select class:</span> 
-    {classname.map((classes, index) => (
-       <button className='class-button' key={index} onClick={() => handlefilter(classes)}>Class: {classes}</button> 
-    ))}
-    </div>:
-   <div className='create-class-button'>
-     <Link className='create-class-link' to="/add/students/in/class">Add Students in Class<MdOutlinePersonAdd size={22} className='icon'/>
-    </Link> 
-   </div>
-} 
-   {submitbutton?<div className='attendance-container' >
-   
+      {createclassbutton ? (
+        <div className='class-buttons'>
+          <span className='fw-bold fs-3'>Select class:</span>
+          {classname.map((classes, index) => (
+            <button
+              className='class-button'
+              key={index}
+              onClick={() => handlefilter(classes)}
+            >
+              Class: {classes}
+            </button>
+          ))}
+        </div>
+      ) : (
+        <div className='create-class-button'>
+          <Link className='create-class-link' to='/add/students/in/class'>
+            Add Students in Class
+            <MdOutlinePersonAdd size={22} className='icon' />
+          </Link>
+        </div>
+      )}
+      {submitbutton ? (
+        <div className='attendance-container'>
+          <div className='students-list'>
+            <table>
+              <thead>
+                <tr>
+                  <th className='thead-row'>Name</th>
+                  <th className='thead-row'>Class</th>
+                  <th className='thead-row'>Roll-No</th>
+                  <th className='thead-row'>Attendance</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredstudents.map((data, index) => (
+                  <tr key={index}>
+                    <td className='table-row'>{data.name}</td>
+                    <td className='table-row'>{data.classname}</td>
+                    <td className='table-row'>{data.rollno}</td>
+                    <td className='table-row'>
+                      {data.attendance ? (
+                        <p>{data.attendance==="Present"?<p className='bg-success rounded p-2 fw-bold'>Present</p>:<p className='bg-danger rounded p-2 fw-bold'>Absent</p>}</p>
+                      ) : (
+                        <>
+                          <button
+                            className='present-button'
+                            onClick={() => handleAttendance(data, 'Present')}
+                          >
+                            Present
+                          </button>
+                          <button
+                            className='absent-button'
+                            onClick={() => handleAttendance(data, 'Absent')}
+                          >
+                            Absent
+                          </button>
+                        </>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      ) : null}
+      {submitbutton ? (
+        <div className='submit'>
+          <button className='submit-button' onClick={handleonsubmit}>
+            Submit Attendance
+          </button>
+        </div>
+      ) : null}
+    </>
+  );
+};
 
-   <div className='students-list'>
-   <table>
-
-               <thead >
-                   <tr >
-                       <th className='thead-row'>Name</th>
-                       <th className='thead-row'>Class</th>
-                       <th className='thead-row'>Roll-No</th>
-                       <th className='thead-row'>Attendance</th>
-                   </tr>
-                   
-               </thead>
-               <tbody>
-   {filteredstudents.map((data, index) => (
-       <tr key={index}>
-           <td className='table-row'>{data.name}</td>
-           <td className='table-row'>{data.classname}</td>
-           <td className='table-row'>{data.rollno}</td>
-           <td className='table-row'>
-             {presentbutton?<button className='present-button' onClick={() => handleonpresent(data)}>Present</button>:null}  
-              {absentbutton?<button className='absent-button' onClick={() => handleonabsent(data)}>Absent</button>:null} 
-           </td>
-       </tr>
-   ))}
-</tbody>
-
-           </table>
-
-          
-       
-
-   </div>
-   
-</div>:null} 
-{submitbutton?<div  className='submit'><button className='submit-button' onClick={handleonsubmit}>Submit Attendance</button></div>:null} 
-
-</>
-
-)
-}
-
-export default TakeAttendance
+export default TakeAttendance;
