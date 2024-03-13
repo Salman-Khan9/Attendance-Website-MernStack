@@ -76,6 +76,7 @@ const TakeAttendance = () => {
       );
       console.log(res.data);
       setAttendancedata([]);
+      setfilteredstudents([])
     } catch (error) {
       console.log(error);
     }

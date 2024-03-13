@@ -145,11 +145,13 @@ background-color: rgb(242, 239, 239);
 .present-button{
     background-color: rgb(202, 245, 202);
     border-radius: 10px;
-    margin-bottom: 4px;
+    margin-top: 4px;
+    margin-bottom: 2px;
 }
 .absent-button{
     background-color: rgb(255, 187, 187);
-margin-top: 4px;
+margin-top: 1px;
+margin-bottom: 4px;
     border-radius: 10px;
 }
 .submit{
