@@ -11,8 +11,6 @@ const app = express();
 app.use(cors({
   origin:"https://attendify-website-mern-stack.vercel.app",
   credentials:true,
- 
-
 }))
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
