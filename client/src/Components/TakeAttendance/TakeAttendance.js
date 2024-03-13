@@ -15,7 +15,6 @@ const TakeAttendance = () => {
   const [filteredstudents, setfilteredstudents] = useState([]);
   const [Attendancedata, setAttendancedata] = useState([]);
   const [submitbutton, setsubmitbutton] = useState(false);
-  const [createclassbutton, setcreateclassbutton] = useState(false);
 
   useEffect(() => {
     const fetchdata = async () => {
@@ -86,7 +85,7 @@ const TakeAttendance = () => {
 
   return (
     <>
-      {createclassbutton ? (
+      {studentdataarray.length>0 ? (
         <div className='class-buttons'>
           <span className='fw-bold fs-3'>Select class:</span>
           {classname.map((classes, index) => (
