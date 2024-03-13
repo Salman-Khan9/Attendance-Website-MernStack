@@ -4,6 +4,7 @@ import axios from 'axios';
 import '../TakeAttendance/TakeAttendance.css';
 import { MdOutlinePersonAdd } from 'react-icons/md';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const TakeAttendance = () => {
   Authentication('/login');
@@ -69,14 +70,14 @@ const TakeAttendance = () => {
   const handleonsubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
+       await axios.post(
         `${backend_url}students/attendance`,
         Attendancedata,
         { withCredentials: true }
       );
-      console.log(res.data);
       setAttendancedata([]);
       setfilteredstudents([])
+      toast.success("Attendance Submitted")
     } catch (error) {
       console.log(error);
     }
@@ -105,7 +106,7 @@ const TakeAttendance = () => {
           </Link>
         </div>
       )}
-      {submitbutton ? (
+      {filteredstudents.length>0 ? (
         <div className='attendance-container'>
           <div className='students-list'>
             <table>
@@ -149,7 +150,7 @@ const TakeAttendance = () => {
             </table>
           </div>
         </div>
-      ) : null}
+      ) : <div className='fw-bold fs-3 d-flex justify-content-centre'>Select class to take attendance</div>}
       {submitbutton ? (
         <div className='submit'>
           <button className='submit-button' onClick={handleonsubmit}>

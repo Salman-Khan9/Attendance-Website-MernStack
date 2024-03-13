@@ -5,6 +5,7 @@ import Authentication from '../../Middleware/Authentication'
 import Navbar from '../../Components/Navbar/Navbar'
 import { useSelector } from 'react-redux'
 import { selectteacher } from '../../Redux/Slices/TeacherSlice'
+import { toast } from 'react-toastify'
 
 const CreateClass = () => {
     const teacher = useSelector(selectteacher)
@@ -27,9 +28,9 @@ const handleonchange=(e)=>{
 const handelonsubmit = async(e)=>{
     e.preventDefault()
 try {
-    const res = await axios.post(`${backend_url}Student`,formdata,{withCredentials:true})
+    await axios.post(`${backend_url}Student`,formdata,{withCredentials:true})
     setformdata(initialstate)
-    console.log(res.data)
+    toast.success("Student Added")
 } catch (error) {
     console.log(error)
 }

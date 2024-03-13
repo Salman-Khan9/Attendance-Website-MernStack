@@ -26,6 +26,7 @@ const AttendanceHistory = () => {
             const {attendancehistory,classname} = res.data
             setAttendancedata(attendancehistory)
             setclassname(classname)
+            
         } catch (error) {
             console.log(error)
         }

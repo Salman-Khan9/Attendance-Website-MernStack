@@ -6,11 +6,14 @@ import Signup from './Pages/Signup/Signup';
 import Home from './Pages/Home/Home';
 import CreateClass from './Pages/CreateClass/CreateClass';
 import AttendanceHistory from './Pages/AttendanceHistory/AttendanceHistory';
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
     
     <Router>
+      <ToastContainer/>
       <Routes>
       <Route path='/' element={<Home/>}/>
         <Route path='/login' element={<Login/>}/>

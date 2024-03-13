@@ -7,6 +7,7 @@ import "../Signup/Signup.css"
 import Navbar from '../../Components/Navbar/Navbar'
 import { set_teacher } from '../../Redux/Slices/TeacherSlice'
 import { useNavigate } from 'react-router'
+import { toast } from 'react-toastify'
 const Signup = () => {
   const backend_url = process.env.REACT_APP_BACKEND_URL
 
@@ -31,6 +32,7 @@ const handleonsubmit =async (e)=>{
   try {
     const res = await axios.post(`${backend_url}signup`,Formdata,{withCredentials:true})
     dispatch(set_teacher(res.data))
+    toast.success("Registered successfully")
     navigate("/")
   } catch (error) {
     console.log(error)

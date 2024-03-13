@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router'
 import { useDispatch } from 'react-redux'
 import { set_teacher } from '../../Redux/Slices/TeacherSlice'
 import { set_logstatus } from '../../Redux/Slices/AuthSlice'
+import { toast } from 'react-toastify'
 
 const Login = () => {
     const backend_url = process.env.REACT_APP_BACKEND_URL
@@ -28,9 +29,9 @@ const Login = () => {
         e.preventDefault()
         try {
            const res =  await axios.post(`${backend_url}login`,Formdata,{withCredentials:true})
-           console.log(res.data)
            dispatch(set_logstatus(true))
              dispatch(set_teacher(res.data))
+             toast.success("Loggedin successfully")
              navigate("/")
         } catch (error) {
             console.log(error)
