@@ -15,6 +15,7 @@ const TakeAttendance = () => {
   const [filteredstudents, setfilteredstudents] = useState([]);
   const [Attendancedata, setAttendancedata] = useState([]);
   const [submitbutton, setsubmitbutton] = useState(false);
+  const [createclassbutton, setcreateclassbutton] = useState(false);
 
   useEffect(() => {
     const fetchdata = async () => {
@@ -24,6 +25,9 @@ const TakeAttendance = () => {
         });
 
         const { studentdata, uniqueclassArray } = data.data;
+        if (studentdata.length > 0) {
+          setcreateclassbutton(true);
+        }
         setstudentdata(studentdata);
         setclassname(uniqueclassArray);
       } catch (error) {
@@ -82,7 +86,7 @@ const TakeAttendance = () => {
 
   return (
     <>
-    
+    (
         <div className='class-buttons'>
           <span className='fw-bold fs-3'>Select class:</span>
           {classname.map((classes, index) => (
@@ -95,15 +99,15 @@ const TakeAttendance = () => {
             </button>
           ))}
         </div>
-      
-      {studentdataarray.length>0 ?null  : 
+      )
+      {createclassbutton ? null : (
         <div className='create-class-button'>
           <Link className='create-class-link' to='/add/students/in/class'>
             Add Students in Class
             <MdOutlinePersonAdd size={22} className='icon' />
           </Link>
         </div>
-      }
+      )}
       {filteredstudents.length>0 ? (
         <div className='attendance-container'>
           <div className='students-list'>
