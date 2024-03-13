@@ -1,20 +1,23 @@
 {
-    "version": 2,
+
+    "version":2,
     "builds": [
-      {
-        "src": "./server.js",
-        "use": "@vercel/node"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "",
-        "methods": ["GET", "POST"],
-        "headers": {
-          "Access-Control-Allow-Origin": "https://attendify-website-mern-stack.vercel.app",
-          "Access-Control-Allow-Credentials": "true"
+        {
+          "src": "./server.js",
+          "use": "@vercel/node"
         }
-      }
+      ],
+    
+    "routes":[
+        {
+            "src":"/(.*)",
+            "dest":"/server.js",
+            "methods": ["GET", "POST"],
+            "headers": {
+              "Access-Control-Allow-Origin": "https://attendify-website-mern-stack.vercel.app"
+            }
+
+        }
     ]
-  }
+
+}
