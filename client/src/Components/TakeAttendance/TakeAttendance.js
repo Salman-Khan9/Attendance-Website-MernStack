@@ -77,6 +77,7 @@ const TakeAttendance = () => {
       );
       setAttendancedata([]);
       setfilteredstudents([])
+      setsubmitbutton(false)
       toast.success("Attendance Submitted")
     } catch (error) {
       console.log(error);
@@ -150,7 +151,7 @@ const TakeAttendance = () => {
             </table>
           </div>
         </div>
-      ) : <div className='fw-bold fs-3 d-flex justify-content-centre'>Select class to take attendance</div>}
+      ) : null}
       {submitbutton ? (
         <div className='submit'>
           <button className='submit-button' onClick={handleonsubmit}>
