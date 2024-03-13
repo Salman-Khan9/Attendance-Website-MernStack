@@ -24,9 +24,6 @@ const TakeAttendance = () => {
         });
 
         const { studentdata, uniqueclassArray } = data.data;
-        if (studentdata.length > 0) {
-          setcreateclassbutton(true);
-        }
         setstudentdata(studentdata);
         setclassname(uniqueclassArray);
       } catch (error) {
