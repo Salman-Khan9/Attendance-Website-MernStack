@@ -82,7 +82,7 @@ const TakeAttendance = () => {
 
   return (
     <>
-      {studentdataarray.length>0 ? (
+    
         <div className='class-buttons'>
           <span className='fw-bold fs-3'>Select class:</span>
           {classname.map((classes, index) => (
@@ -95,14 +95,15 @@ const TakeAttendance = () => {
             </button>
           ))}
         </div>
-      ) : (
+      
+      {studentdataarray.length>0 ?null  : 
         <div className='create-class-button'>
           <Link className='create-class-link' to='/add/students/in/class'>
             Add Students in Class
             <MdOutlinePersonAdd size={22} className='icon' />
           </Link>
         </div>
-      )}
+      }
       {filteredstudents.length>0 ? (
         <div className='attendance-container'>
           <div className='students-list'>
