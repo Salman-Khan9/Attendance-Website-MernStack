@@ -127,11 +127,22 @@ background-color: rgb(242, 239, 239);
     .history-subject-name{
     margin-left: 10px;
     }
-    .history-class-buttons{
-      display:flex;
-      justify-content : center
+    .history-class-buttons {
+      display: flex;
+      flex-wrap: wrap; /* Add this line */
+      justify-content: center;
+      text-align: center;
+    }
   
-  }
+    .history-class-button {
+      margin: 5px;
+      border-radius: 10px;
+      font-weight: 400;
+      font-family: Arial, Helvetica, sans-serif;
+      flex: 1 0 calc(33.33% - 10px); /* Added line: Three buttons per line */
+      max-width: calc(33.33% - 10px); /* Added line: Three buttons per line */
+    }
+  
   .history-table-row{
     padding-left: 14px;
     padding-top: 8px;
