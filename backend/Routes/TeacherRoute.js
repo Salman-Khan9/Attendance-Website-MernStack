@@ -1,7 +1,7 @@
 const express = require("express")
 const Teacher = require("../Models/TeacherModel")
 const jwt = require("jsonwebtoken")
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcryptjs")
 const routes = express.Router()
 const generatetoken = (id)=>{
     return jwt.sign({id},process.env.SECRET_KEY, {expiresIn:"1d"})
