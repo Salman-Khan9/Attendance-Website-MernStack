@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { selectloggedstatus } from '../../Redux/Slices/AuthSlice';
 import { Navigate } from 'react-router-dom';
+import { selectloggedstatus } from '../Redux/Slices/AuthSlice';
 
 const RequireLoggedOut = ({ children }) => {
   const isLoggedIn = useSelector(selectloggedstatus);
