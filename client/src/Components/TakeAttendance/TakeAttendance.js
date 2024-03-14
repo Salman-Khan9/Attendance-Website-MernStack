@@ -100,7 +100,7 @@ const TakeAttendance = () => {
             <button
               className='class-button'
               key={index}
-              onClick={() => handlefilter(classes)}
+              onClick={() => handleFilter(classes)}
             >
               Class: {classes}
             </button>
@@ -162,7 +162,7 @@ const TakeAttendance = () => {
       ) : null}
       {submitbutton ? (
         <div className='submit'>
-          <button className='submit-button' onClick={handleonsubmit}>
+          <button className='submit-button' onClick={handleOnSubmit}>
             Submit Attendance
           </button>
         </div>
