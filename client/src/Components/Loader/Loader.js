@@ -7,7 +7,7 @@ const Loader = () => {
     return ReactDOM.createPortal(
         <div className="wrapper">
           <div className="loader">
-            <img src={loader} style={{mixBlendMode:"multiply"}} alt="Loading..." />
+            <img src={loader}  alt="Loading..." />
           </div>
         </div>,
         document.getElementById("loader")
@@ -17,7 +17,7 @@ const Loader = () => {
     export const SpinnerImg = () => {
       return (
         <div className="--center-all">
-          <img src={loader} style={{mixBlendMode:"multiply"}} alt="Loading..." />
+          <img src={loader}  alt="Loading..." />
         </div>
       );
     };

@@ -6,6 +6,7 @@ import { MdOutlinePersonAdd } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Spinner } from 'react-bootstrap'; 
+import Loader from '../Loader/Loader';
 
 const TakeAttendance = () => {
   Authentication('/login');
@@ -92,26 +93,21 @@ const TakeAttendance = () => {
 
   return (
     <>
-      <div className='class-buttons'>
-        <span className='fw-bold fs-3'>Select class:</span>
-        {loadingStudents ? ( 
-          <Spinner animation='border' role='status'>
-            <span className='visually-hidden'>Loading...</span>
-          </Spinner>
-        ) : (
-          classname.map((classes, index) => (
+     {loadingAttendance || loadingStudents ? <Loader/>:null}
+        <div className='class-buttons'>
+          <span className='fw-bold fs-3'>Select class:</span>
+          {classname.map((classes, index) => (
             <button
               className='class-button'
               key={index}
-              onClick={() => handleFilter(classes)}
+              onClick={() => handlefilter(classes)}
             >
               Class: {classes}
             </button>
-          ))
-        )}
-      </div>
-
-      {createclassbutton ? null :
+          ))}
+        </div>
+      
+      {createclassbutton ? null : 
         <div className='create-class-button'>
           <Link className='create-class-link' to='/add/students/in/class'>
             Add Students in Class
@@ -119,7 +115,7 @@ const TakeAttendance = () => {
           </Link>
         </div>
       }
-      {filteredstudents.length > 0 ? (
+      {filteredstudents.length>0 ? (
         <div className='attendance-container'>
           <div className='students-list'>
             <table>
@@ -139,7 +135,7 @@ const TakeAttendance = () => {
                     <td className='table-row'>{data.rollno}</td>
                     <td className='table-row'>
                       {data.attendance ? (
-                        <p>{data.attendance === "Present" ? <p className='bg-success rounded p-2 fw-bold'>Present</p> : <p className='bg-danger rounded p-2 fw-bold'>Absent</p>}</p>
+                        <p>{data.attendance==="Present"?<p className='bg-success rounded p-2 fw-bold'>Present</p>:<p className='bg-danger rounded p-2 fw-bold'>Absent</p>}</p>
                       ) : (
                         <>
                           <button
@@ -166,15 +162,9 @@ const TakeAttendance = () => {
       ) : null}
       {submitbutton ? (
         <div className='submit'>
-          {loadingAttendance ? ( 
-            <Spinner animation='border' role='status'>
-              <span className='visually-hidden'>Loading...</span>
-            </Spinner>
-          ) : (
-            <button className='submit-button' onClick={handleOnSubmit}>
-              Submit Attendance
-            </button>
-          )}
+          <button className='submit-button' onClick={handleonsubmit}>
+            Submit Attendance
+          </button>
         </div>
       ) : null}
     </>
