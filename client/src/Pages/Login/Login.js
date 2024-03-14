@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 import { Spinner } from 'react-bootstrap'; 
 import 'bootstrap';
 import Loader from '../../Components/Loader/Loader';
+import RequireLoggedOut from '../../Middleware/Requirelogout';
 
 const Login = () => {
     const backend_url = process.env.REACT_APP_BACKEND_URL;
@@ -49,7 +50,7 @@ const logstatus = useSelector(selectloggedstatus)
         }
     };
   return (
-    <>
+    <RequireLoggedOut>
     {loading?<Loader/>:null}
     <Navbar/>
     <div className='container mt-5'>
@@ -66,7 +67,7 @@ const logstatus = useSelector(selectloggedstatus)
         </form>
     </div>
     </div>
-    </>
+    </RequireLoggedOut>
   )
 }
 

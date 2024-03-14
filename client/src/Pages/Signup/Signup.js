@@ -11,6 +11,7 @@ import 'react-bootstrap';
 import '../Signup/Signup.css';
 import { selectloggedstatus } from '../../Redux/Slices/AuthSlice';
 import Loader from '../../Components/Loader/Loader';
+import RequireLoggedOut from '../../Middleware/Requirelogout';
 
 const Signup = () => {
   const backend_url = process.env.REACT_APP_BACKEND_URL;
@@ -51,7 +52,7 @@ const logstatus = useSelector(selectloggedstatus)
     }
   };
   return (
-    <>
+    <RequireLoggedOut>
       <Navbar/>
     {loading?<Loader/>:null}
     <div className='container mt-5'>
@@ -81,7 +82,7 @@ const logstatus = useSelector(selectloggedstatus)
       </div>
     </div>
     
-    </>
+    </RequireLoggedOut>
   )
 }
 

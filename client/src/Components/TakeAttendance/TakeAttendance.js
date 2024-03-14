@@ -19,7 +19,7 @@ const TakeAttendance = () => {
   const [submitbutton, setsubmitbutton] = useState(false);
   const [createclassbutton, setcreateclassbutton] = useState(false);
   const [loadingStudents, setLoadingStudents] = useState(true); 
-  const [loadingAttendance, setLoadingAttendance] = useState(true); 
+  const [loadingAttendance, setLoadingAttendance] = useState(false); 
 
   useEffect(() => {
     const fetchData = async () => {
