@@ -53,7 +53,6 @@ const TakeAttendance = () => {
   const handleAttendance = (data, attendance) => {
     const updatedData = filteredstudents.map((student) => {
       if (student.rollno === data.rollno) {
-        // Update the attendance only for the specific student being clicked on
         return {
           ...student,
           attendance: attendance,
@@ -61,8 +60,15 @@ const TakeAttendance = () => {
       }
       return student;
     });
-    // Update the filtered students list with the updated data
     setfilteredstudents(updatedData);
+
+    const payload = {
+      name: data.name,
+      classname: data.classname,
+      rollno: data.rollno,
+      attendance: attendance,
+    };
+    setAttendancedata((prevData) => [...prevData, payload]);
   };
 
   const handleOnSubmit = async (e) => {
