@@ -93,7 +93,8 @@ const TakeAttendance = () => {
 
   return (
     <>
-     {loadingAttendance || loadingStudents ? <Loader/>:null}
+     {loadingAttendance ? <Loader/>:null}
+     {loadingStudents ? <Loader/>:null}
         <div className='class-buttons'>
           <span className='fw-bold fs-3'>Select class:</span>
           {classname.map((classes, index) => (
