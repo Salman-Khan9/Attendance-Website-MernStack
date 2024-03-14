@@ -1,12 +1,10 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Authentication from '../../Middleware/Authentication';
+import axios from 'axios';
 import '../TakeAttendance/TakeAttendance.css';
 import { MdOutlinePersonAdd } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { Spinner } from 'react-bootstrap'; 
-import Loader from '../Loader/Loader';
 
 const TakeAttendance = () => {
   Authentication('/login');
@@ -18,30 +16,28 @@ const TakeAttendance = () => {
   const [Attendancedata, setAttendancedata] = useState([]);
   const [submitbutton, setsubmitbutton] = useState(false);
   const [createclassbutton, setcreateclassbutton] = useState(false);
-  const [loadingStudents, setLoadingStudents] = useState(true); 
-  const [loadingAttendance, setLoadingAttendance] = useState(false); 
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchdata = async () => {
       try {
-        const studentsResponse = await axios.get(`${backend_url}Allstudents`, { withCredentials: true });
-        const { studentdata, uniqueclassArray } = studentsResponse.data;
-        setstudentdata(studentdata);
-        setclassname(uniqueclassArray);
-        setLoadingStudents(false); 
+        const data = await axios.get(`${backend_url}Allstudents`, {
+          withCredentials: true,
+        });
+
+        const { studentdata, uniqueclassArray } = data.data;
         if (studentdata.length > 0) {
           setcreateclassbutton(true);
         }
+        setstudentdata(studentdata);
+        setclassname(uniqueclassArray);
       } catch (error) {
         console.log(error);
-        setLoadingStudents(false); 
       }
     };
-
-    fetchData();
+    fetchdata();
   }, [backend_url]);
 
-  const handleFilter = (classes) => {
+  const handlefilter = (classes) => {
     const studentdata = studentdataarray
       .filter((data) => data.classname === classes)
       .map((students, index) => students);
@@ -71,11 +67,10 @@ const TakeAttendance = () => {
     setAttendancedata((prevData) => [...prevData, payload]);
   };
 
-  const handleOnSubmit = async (e) => {
+  const handleonsubmit = async (e) => {
     e.preventDefault();
     try {
-      setLoadingAttendance(true); 
-      await axios.post(
+       await axios.post(
         `${backend_url}students/attendance`,
         Attendancedata,
         { withCredentials: true }
@@ -83,25 +78,22 @@ const TakeAttendance = () => {
       setAttendancedata([]);
       setfilteredstudents([])
       setsubmitbutton(false)
-      setLoadingAttendance(false); 
       toast.success("Attendance Submitted")
     } catch (error) {
       console.log(error);
-      setLoadingAttendance(false); 
     }
   };
 
   return (
     <>
-     {loadingAttendance ? <Loader/>:null}
-     {loadingStudents ? <Loader/>:null}
+    
         <div className='class-buttons'>
           <span className='fw-bold fs-3'>Select class:</span>
           {classname.map((classes, index) => (
             <button
               className='class-button'
               key={index}
-              onClick={() => handleFilter(classes)}
+              onClick={() => handlefilter(classes)}
             >
               Class: {classes}
             </button>
@@ -163,7 +155,7 @@ const TakeAttendance = () => {
       ) : null}
       {submitbutton ? (
         <div className='submit'>
-          <button className='submit-button' onClick={handleOnSubmit}>
+          <button className='submit-button' onClick={handleonsubmit}>
             Submit Attendance
           </button>
         </div>
