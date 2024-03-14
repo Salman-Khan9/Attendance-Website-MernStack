@@ -9,6 +9,7 @@ import { selectloggedstatus, set_logstatus } from '../../Redux/Slices/AuthSlice'
 import { toast } from 'react-toastify';
 import { Spinner } from 'react-bootstrap'; 
 import 'bootstrap';
+import Loader from '../../Components/Loader/Loader';
 
 const Login = () => {
     const backend_url = process.env.REACT_APP_BACKEND_URL;
@@ -47,32 +48,26 @@ const logstatus = useSelector(selectloggedstatus)
             setLoading(false); 
         }
     };
+  return (
+    <>
+    {loading?<Loader/>:null}
+    <Navbar/>
+    <div className='container mt-5'>
+    <div className='card p-4'>
+        <h2 className='text-center mb-4'>Login</h2>
+        <form onSubmit={handleonsubmit}>
+            <label className='form-label'>Email</label>
+            <input className='form-control' type='email' name='email' value={email} placeholder='Enter your Email' onChange={handleonchange}/>
+            <label className='form-label'>Password</label>
+            <input className='form-control' type='password' name='password' value={password} placeholder='Enter your Password' onChange={handleonchange}/>
+        <div>
+            <button type='submit' className='btn-info'>Login</button>
+        </div>
+        </form>
+    </div>
+    </div>
+    </>
+  )
+}
 
-    return (
-        <>
-            <Navbar />
-            <div className='container mt-5'>
-                <div className='card p-4'>
-                    <h2 className='text-center mb-4'>Login</h2>
-                    <form onSubmit={handleonsubmit}>
-                        <label className='form-label'>Email</label>
-                        <input className='form-control' type='email' name='email' value={email} placeholder='Enter your Email' onChange={handleonchange} />
-                        <label className='form-label'>Password</label>
-                        <input className='form-control' type='password' name='password' value={password} placeholder='Enter your Password' onChange={handleonchange} />
-                        <div>
-                            {loading ? ( 
-                                <Spinner animation='border' role='status'>
-                                    <span className='visually-hidden'>Loading...</span>
-                                </Spinner>
-                            ) : (
-                                <button type='submit' className='btn-info'>Login</button>
-                            )}
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </>
-    );
-};
-
-export default Login;
+export default Login

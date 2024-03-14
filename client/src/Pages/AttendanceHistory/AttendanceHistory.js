@@ -7,8 +7,9 @@ import Calendar from 'react-calendar';
 import "../AttendanceHistory/AttendanceHistory.css";
 import { useSelector } from 'react-redux';
 import { selectteacher } from '../../Redux/Slices/TeacherSlice';
-import { Spinner } from 'react-bootstrap';
+import { Spinner } from 'react-bootstrap'; // Import Spinner from react-bootstrap
 import 'bootstrap';
+import Loader from '../../Components/Loader/Loader';
 
 const AttendanceHistory = () => {
     Authentication("/login");
@@ -20,7 +21,7 @@ const AttendanceHistory = () => {
     const [filteredattendance, setfilteredattendance] = useState([]);
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [showCalendar, setShowCalendar] = useState(false);
-    const [loading, setLoading] = useState(true); 
+    const [loading, setLoading] = useState(true); // State for loader
 
     useEffect(() => {
         const fetchdata = async () => {
@@ -29,10 +30,10 @@ const AttendanceHistory = () => {
                 const { attendancehistory, classname } = res.data;
                 setAttendancedata(attendancehistory);
                 setclassname(classname);
-                setLoading(false); 
+                setLoading(false); // Set loading to false when data is fetched
             } catch (error) {
                 console.log(error);
-                setLoading(false); 
+                setLoading(false); // Set loading to false in case of error
             }
         };
         fetchdata();
@@ -70,68 +71,69 @@ const AttendanceHistory = () => {
         const filteredData = Attendancedata.filter(attendance => attendance.date === formattedDate);
         setfilteredattendance(filteredData);
     };
+    
+      
+    
+  return (
+    <>
+    {loading?<Loader/>:null}
+    <div>
+        <Navbar></Navbar>
+<div className='history-teacher'><span className='history-Teacher-name'>Teacher: {teacher.name}</span><span className='history-subject-name'>Subject: {teacher.subject}</span>
+</div>
+        <div className='history-class-buttons'>
+  {classname.length>0? <span className='fw-bold fs-3'>Select class:</span> :<span className='fw-bold fs-3'>History not available</span>}
+            
+        {classname.map((classes,index)=>(
+            <button className='history-class-button' onClick={()=>handleonclick(classes)}>Class:{classes}</button>
+        ))}
+        </div>
+        
+        </div>
+       {classname.length>0?<div className='calendar-container'>
+          <button className='calendar-button' onClick={() => setShowCalendar(!showCalendar)}>Search through calendar</button>
+          {showCalendar && (
+            <Calendar
+              onChange={handleDateChange}
+              value={selectedDate}
+              className='custom-calendar'
+            />
+          )}
+        </div>:null} 
+        <div>
+    {filteredattendance.map((data, index) => (
+        <div >
 
-    return (
-        <>
-            <div>
-                <Navbar />
-                <div className='history-teacher'><span className='history-Teacher-name'>Teacher: {teacher.name}</span><span className='history-subject-name'>Subject: {teacher.subject}</span></div>
-                <div className='history-class-buttons'>
-                    {classname.length > 0 ? <span className='fw-bold fs-3'>Select class:</span> : <span className='fw-bold fs-3'>History not available</span>}
-                    {classname.map((classes, index) => (
-                        <button className='history-class-button' onClick={() => handleonclick(classes)}>Class:{classes}</button>
-                    ))}
-                </div>
+            <span className='date-div'><div className='date'>Date: {data.date}</div></span>
+            <div className='history-attendance-container'>
+            <div className='history-students-list'>
+            <table>
+                <thead>
+                    <tr>
+                        <th className='history-thead-row'>Name</th>
+                        <th className='history-thead-row'>Class</th>
+                        <th className='history-thead-row'>Roll-no</th>
+                        <th className='history-thead-row'>Appearance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {data.StudentsAttendance.map((subdata, index) => (
+                  <>  <tr key={index}></tr>
+                    <td className='history-table-row'>{subdata.name}</td>
+                    <td className='history-table-row' >{subdata.classname}</td>
+                    <td className='history-table-row' >{subdata.rollno}</td>
+                    <td className='history-table-row' >{subdata.attendance==="Present"?<p className='bg-success rounded p-2 fw-bold'>Present</p>:<p className='bg-danger rounded p-2 fw-bold'>Absent</p>}</td>
+                    </>
+                ))}
+                </tbody>
+            </table>
             </div>
-            {classname.length > 0 ? <div className='calendar-container'>
-                <button className='calendar-button' onClick={() => setShowCalendar(!showCalendar)}>Search through calendar</button>
-                {showCalendar && (
-                    <Calendar
-                        onChange={handleDateChange}
-                        value={selectedDate}
-                        className='custom-calendar'
-                    />
-                )}
-            </div> : null}
-            {loading ? ( 
-                <Spinner animation='border' role='status'>
-                    <span className='visually-hidden'>Loading...</span>
-                </Spinner>
-            ) : (
-                <div>
-                    {filteredattendance.map((data, index) => (
-                        <div>
-                            <span className='date-div'><div className='date'>Date: {data.date}</div></span>
-                            <div className='history-attendance-container'>
-                                <div className='history-students-list'>
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th className='history-thead-row'>Name</th>
-                                                <th className='history-thead-row'>Class</th>
-                                                <th className='history-thead-row'>Roll-no</th>
-                                                <th className='history-thead-row'>Appearance</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {data.StudentsAttendance.map((subdata, index) => (
-                                                <tr key={index}>
-                                                    <td className='history-table-row'>{subdata.name}</td>
-                                                    <td className='history-table-row'>{subdata.classname}</td>
-                                                    <td className='history-table-row'>{subdata.rollno}</td>
-                                                    <td className='history-table-row'>{subdata.attendance === "Present" ? <p className='bg-success rounded p-2 fw-bold'>Present</p> : <p className='bg-danger rounded p-2 fw-bold'>Absent</p>}</td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            )}
+            </div>
+        </div>
+    ))}
+</div>
         </>
-    );
+  )
 }
 
-export default AttendanceHistory;
+export default AttendanceHistory

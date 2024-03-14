@@ -8,6 +8,7 @@ import { selectteacher } from '../../Redux/Slices/TeacherSlice';
 import { toast } from 'react-toastify';
 import { Spinner } from 'react-bootstrap'; 
 import 'bootstrap';
+import Loader from '../../Components/Loader/Loader';
 
 const CreateClass = () => {
     const teacher = useSelector(selectteacher);
@@ -43,37 +44,30 @@ const CreateClass = () => {
         }
     };
 
-    return (
-        <>
-            <Navbar />
-            <div className='teacher'><span className='Teacher-name'>Teacher: {teacher.name}</span><span className='subject-name'>Subject: {teacher.subject}</span></div>
+  return (
+<>
+<Navbar></Navbar>
+{loading?<Loader/>:null}
+<div className='teacher'><span className='Teacher-name'>Teacher: {teacher.name}</span><span className='subject-name'>Subject: {teacher.subject}</span></div>
 
-            <div className="create-class-container">
-                <div className='create-class-form-container'>
-                    <div className="create-class-form">
-                        <h2>Add student in class</h2>
-                        <form onSubmit={handelonsubmit}>
-                            <label>Student Name</label>
-                            <input type="text" name="name" value={name} placeholder="Enter student name" onChange={handleonchange} />
-                            <label>Student Class</label>
-                            <input type="number" className='class-name' name="classname" value={classname} placeholder="Enter student class" onChange={handleonchange} />
-                            <label>Student Roll-No</label>
-                            <input type="text" name="rollno" value={rollno} placeholder="Enter student roll-no" onChange={handleonchange} />
-                            <div>
-                                {loading ? ( 
-                                    <Spinner animation='border' role='status'>
-                                        <span className='visually-hidden'>Loading...</span>
-                                    </Spinner>
-                                ) : (
-                                    <button type="submit">Submit</button>
-                                )}
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </>
-    );
-};
+    <div className="create-class-container">
+    <div className='create-class-form-container'>
+    <div className="create-class-form">
+        <h2>Add student in class</h2>
+        <form onSubmit={handelonsubmit}>
+            <label>Student Name</label>
+            <input type="text" name="name" value={name} placeholder="Enter student name" onChange={handleonchange} />
+            <label>Student Class</label>
+            <input type="number" className='class-name' name="classname" value={classname} placeholder="Enter student class" onChange={handleonchange} />
+            <label>Student Roll-No</label>
+            <input type="text" name="rollno" value={rollno} placeholder="Enter student roll-no" onChange={handleonchange} />
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    </div>
+</div>
+</>
+  )
+}
 
-export default CreateClass;
+export default CreateClass
