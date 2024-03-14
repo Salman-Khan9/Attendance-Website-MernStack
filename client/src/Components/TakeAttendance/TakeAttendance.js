@@ -1,10 +1,11 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Authentication from '../../Middleware/Authentication';
-import axios from 'axios';
 import '../TakeAttendance/TakeAttendance.css';
 import { MdOutlinePersonAdd } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { Spinner } from 'react-bootstrap'; 
 
 const TakeAttendance = () => {
   Authentication('/login');
@@ -16,28 +17,30 @@ const TakeAttendance = () => {
   const [Attendancedata, setAttendancedata] = useState([]);
   const [submitbutton, setsubmitbutton] = useState(false);
   const [createclassbutton, setcreateclassbutton] = useState(false);
+  const [loadingStudents, setLoadingStudents] = useState(true); 
+  const [loadingAttendance, setLoadingAttendance] = useState(true); 
 
   useEffect(() => {
-    const fetchdata = async () => {
+    const fetchData = async () => {
       try {
-        const data = await axios.get(`${backend_url}Allstudents`, {
-          withCredentials: true,
-        });
-
-        const { studentdata, uniqueclassArray } = data.data;
+        const studentsResponse = await axios.get(`${backend_url}Allstudents`, { withCredentials: true });
+        const { studentdata, uniqueclassArray } = studentsResponse.data;
+        setstudentdata(studentdata);
+        setclassname(uniqueclassArray);
+        setLoadingStudents(false); 
         if (studentdata.length > 0) {
           setcreateclassbutton(true);
         }
-        setstudentdata(studentdata);
-        setclassname(uniqueclassArray);
       } catch (error) {
         console.log(error);
+        setLoadingStudents(false); 
       }
     };
-    fetchdata();
+
+    fetchData();
   }, [backend_url]);
 
-  const handlefilter = (classes) => {
+  const handleFilter = (classes) => {
     const studentdata = studentdataarray
       .filter((data) => data.classname === classes)
       .map((students, index) => students);
@@ -67,10 +70,11 @@ const TakeAttendance = () => {
     setAttendancedata((prevData) => [...prevData, payload]);
   };
 
-  const handleonsubmit = async (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
     try {
-       await axios.post(
+      setLoadingAttendance(true); 
+      await axios.post(
         `${backend_url}students/attendance`,
         Attendancedata,
         { withCredentials: true }
@@ -78,29 +82,36 @@ const TakeAttendance = () => {
       setAttendancedata([]);
       setfilteredstudents([])
       setsubmitbutton(false)
+      setLoadingAttendance(false); 
       toast.success("Attendance Submitted")
     } catch (error) {
       console.log(error);
+      setLoadingAttendance(false); 
     }
   };
 
   return (
     <>
-    
-        <div className='class-buttons'>
-          <span className='fw-bold fs-3'>Select class:</span>
-          {classname.map((classes, index) => (
+      <div className='class-buttons'>
+        <span className='fw-bold fs-3'>Select class:</span>
+        {loadingStudents ? ( 
+          <Spinner animation='border' role='status'>
+            <span className='visually-hidden'>Loading...</span>
+          </Spinner>
+        ) : (
+          classname.map((classes, index) => (
             <button
               className='class-button'
               key={index}
-              onClick={() => handlefilter(classes)}
+              onClick={() => handleFilter(classes)}
             >
               Class: {classes}
             </button>
-          ))}
-        </div>
-      
-      {createclassbutton ? null : 
+          ))
+        )}
+      </div>
+
+      {createclassbutton ? null :
         <div className='create-class-button'>
           <Link className='create-class-link' to='/add/students/in/class'>
             Add Students in Class
@@ -108,7 +119,7 @@ const TakeAttendance = () => {
           </Link>
         </div>
       }
-      {filteredstudents.length>0 ? (
+      {filteredstudents.length > 0 ? (
         <div className='attendance-container'>
           <div className='students-list'>
             <table>
@@ -128,7 +139,7 @@ const TakeAttendance = () => {
                     <td className='table-row'>{data.rollno}</td>
                     <td className='table-row'>
                       {data.attendance ? (
-                        <p>{data.attendance==="Present"?<p className='bg-success rounded p-2 fw-bold'>Present</p>:<p className='bg-danger rounded p-2 fw-bold'>Absent</p>}</p>
+                        <p>{data.attendance === "Present" ? <p className='bg-success rounded p-2 fw-bold'>Present</p> : <p className='bg-danger rounded p-2 fw-bold'>Absent</p>}</p>
                       ) : (
                         <>
                           <button
@@ -155,9 +166,15 @@ const TakeAttendance = () => {
       ) : null}
       {submitbutton ? (
         <div className='submit'>
-          <button className='submit-button' onClick={handleonsubmit}>
-            Submit Attendance
-          </button>
+          {loadingAttendance ? ( 
+            <Spinner animation='border' role='status'>
+              <span className='visually-hidden'>Loading...</span>
+            </Spinner>
+          ) : (
+            <button className='submit-button' onClick={handleOnSubmit}>
+              Submit Attendance
+            </button>
+          )}
         </div>
       ) : null}
     </>
