@@ -1,12 +1,13 @@
 import React from 'react'
 import  ReactDOM  from 'react-dom'
-import { IoSchool } from "react-icons/io5";
+import "../Loader/loader.css"
+import loader from "../images/loader.gif"
 
 const Loader = () => {
     return ReactDOM.createPortal(
         <div className="wrapper">
           <div className="loader">
-            <img src={<IoSchool/>} alt="Loading..." />
+            <img src={loader} style={{mixBlendMode:"multiply"}} alt="Loading..." />
           </div>
         </div>,
         document.getElementById("loader")
@@ -16,7 +17,7 @@ const Loader = () => {
     export const SpinnerImg = () => {
       return (
         <div className="--center-all">
-          <img src={<IoSchool/>} alt="Loading..." />
+          <img src={loader} style={{mixBlendMode:"multiply"}} alt="Loading..." />
         </div>
       );
     };
